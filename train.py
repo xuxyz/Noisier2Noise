@@ -57,8 +57,12 @@ class TrainNr2N:
             self.model.load_state_dict(torch.load(load_path))
 
         # Dataset
-        self.train_dataset = ImageNetGray(noise=self.noise, train=True, transform=transform)
-        self.test_dataset = ImageNetGray(noise=self.noise, train=False, transform=transform)
+        # self.train_dataset = ImageNetGray(noise=self.noise, train=True, transform=transform)
+        # self.test_dataset = ImageNetGray(noise=self.noise, train=False, transform=transform)
+
+        self.train_dataset = ImageNetGray(data_dir=args.data_root, noise=self.noise, train=True, transform=transform)
+        self.test_dataset = ImageNetGray(data_dir=args.data_root, noise=self.noise, train=False, transform=transform)
+        
         self.train_dataloader = DataLoader(self.train_dataset, batch_size=args.batch_size, shuffle=True)
 
         # Optimizer

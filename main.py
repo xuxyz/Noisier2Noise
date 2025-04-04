@@ -21,6 +21,9 @@ parser.add_argument('--batch_size', default=4, type=int)
 parser.add_argument('--lr', default=1e-3, type=float)
 parser.add_argument('--noise', default='gauss_25', type=str)
 
+parser.add_argument('--data_root', type=str, default='./imagenet_gray')
+
+
 # Transformations
 parser.add_argument('--crop', type=bool, default=True)
 parser.add_argument('--patch_size', type=int, default=256)
