@@ -30,16 +30,18 @@ def make_exp_dir(main_dir):
 
     dirs = os.listdir(main_dir)
     dir_nums = []
+
     for dir in dirs:
-        dir_num = int(dir[3:])
-        dir_nums.append(dir_num)
-    if len(dirs) == 0:
-        new_dir_num = 1
-    else:
-        new_dir_num = max(dir_nums) + 1
-    new_dir_name = 'exp{}'.format(new_dir_num)
+        if dir.startswith("exp") and dir[3:].isdigit():
+            dir_num = int(dir[3:])
+            dir_nums.append(dir_num)
+
+    new_dir_num = max(dir_nums) + 1 if dir_nums else 1
+    new_dir_name = f'exp{new_dir_num}'
     new_dir = os.path.join(main_dir, new_dir_name)
+
     return {'new_dir': new_dir, 'new_dir_num': new_dir_num}
+
 
 
 ################################# Transforms #################################
