@@ -14,7 +14,16 @@ from tqdm import tqdm
 
 from utils import *
 from models.DnCNN import DnCNN
+from models.unet import UNet
 from dataset import ImageNetGray
+
+def get_model(model_type, device, input_channels=1):
+    if model_type == 'dncnn':
+        return DnCNN(channels=input_channels).to(device)
+    elif model_type == 'unet':
+        return UNet(input_channels=input_channels).to(device)
+    else:
+        raise ValueError(f"Unknown model type: {model_type}")
 
 
 class TrainNr2N:
@@ -51,7 +60,10 @@ class TrainNr2N:
         transform = transforms.Compose(get_transforms(args))
 
         # Models
-        self.model = DnCNN().to(self.device)
+        # self.model = DnCNN().to(self.device)
+        self.model = get_model(args.model_type, self.device, input_channels=1)  # NEW
+
+        
         if args.load_model:
             load_path = './experiments/exp{}/checkpoints/{}epochs.pth'.format(args.load_exp_num, args.load_epoch)
             self.model.load_state_dict(torch.load(load_path))

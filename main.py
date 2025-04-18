@@ -31,6 +31,8 @@ parser.add_argument('--normalize', type=bool, default=True)
 parser.add_argument('--mean', type=float, default=0.4050)  # ImageNet Gray: 0.4050
 parser.add_argument('--std', type=float, default=0.2927)  # ImageNet Gray: 0.2927
 
+parser.add_argument('--model_type', type=str, default='dncnn', choices=['dncnn', 'unet'])
+
 args = parser.parse_args()
 
 # Train Nr2N
