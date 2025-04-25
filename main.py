@@ -21,6 +21,12 @@ parser.add_argument('--batch_size', default=4, type=int)
 parser.add_argument('--lr', default=1e-3, type=float)
 parser.add_argument('--noise', default='gauss_25', type=str)
 
+# --- Adam hyper‑parameters ------------------------------
+parser.add_argument('--beta1', type=float, default=0.9)
+parser.add_argument('--beta2', type=float, default=0.99)
+parser.add_argument('--weight_decay', type=float, default=0.0)
+parser.add_argument('--adam_eps', type=float, default=1e-8)
+
 parser.add_argument('--data_root', type=str, default='./imagenet_gray')
 
 
@@ -32,6 +38,9 @@ parser.add_argument('--mean', type=float, default=0.4050)  # ImageNet Gray: 0.40
 parser.add_argument('--std', type=float, default=0.2927)  # ImageNet Gray: 0.2927
 
 parser.add_argument('--model_type', type=str, default='dncnn', choices=['dncnn', 'unet'])
+
+
+
 
 args = parser.parse_args()
 

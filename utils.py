@@ -102,6 +102,12 @@ class LambdaLR:
         self.offset = offset
         self.decay_start_epoch = decay_start_epoch
 
-    def step(self, epoch):
-        return 1.0 - max(0, epoch + self.offset - self.decay_start_epoch)/(self.n_epochs - self.decay_start_epoch)
+    # def step(self, epoch):
+    #     return 1.0 - max(0, epoch + self.offset - self.decay_start_epoch)/(self.n_epochs - self.decay_start_epoch)
 
+    def step(self, epoch):
+        current_epoch = epoch + self.offset
+        if current_epoch < self.decay_start_epoch:
+            return 1.0  
+        else:
+            return 0.1  

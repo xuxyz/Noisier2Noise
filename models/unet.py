@@ -63,6 +63,16 @@ class UNet(nn.Module):
 
         self.final_conv = nn.Conv2d(32, input_channels, 3, padding=1)
 
+        self.apply(self._init_weights)
+
+    def _init_weights(self, m):
+        if isinstance(m, nn.Conv2d):
+            nn.init.kaiming_normal_(m.weight, nonlinearity='leaky_relu')
+            if m.bias is not None:
+                nn.init.zeros_(m.bias)
+
+
+
     def forward(self, x):
         skips = []
 
